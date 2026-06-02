@@ -2,240 +2,562 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Instagram Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InstaClone Auth UI</title>
+
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
-
-    body { background: #fff; display: flex; justify-content: center; }
-
-    .screen {
-      background: #fff;
-      width: 390px;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      padding: 0 24px;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
     }
 
-    .status-bar {
+    body {
+      min-height: 100vh;
+      background: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .mobile {
+      width: 390px;
+      min-height: 100vh;
+      background: #fff;
+      padding: 18px 24px 14px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .top-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 14px 4px 8px;
-      font-size: 15px;
-      font-weight: 600;
+      margin-bottom: 16px;
     }
 
-    .status-icons { display: flex; align-items: center; gap: 6px; }
-
-    .signal { display: flex; align-items: flex-end; gap: 1.5px; }
-    .signal span { background: #262626; width: 3px; border-radius: 1px; }
-
-    .battery {
-      width: 22px; height: 12px;
-      border: 1.5px solid #262626;
-      border-radius: 2.5px;
-      position: relative;
-      display: flex;
-      align-items: center;
-      padding: 1.5px;
-    }
-    .battery::after {
-      content: '';
-      position: absolute;
-      right: -4px; top: 50%;
-      transform: translateY(-50%);
-      width: 2px; height: 5px;
-      background: #262626;
-      border-radius: 0 1px 1px 0;
-    }
-    .battery-fill { height: 100%; width: 27%; background: #262626; border-radius: 1px; }
-
-    .back-btn { padding: 10px 0 0; cursor: pointer; }
-
-    .lang-selector {
-      text-align: center;
-      margin: 8px 0 0;
-      color: #262626;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-      cursor: pointer;
-    }
-
-    .logo-wrap { display: flex; justify-content: center; margin: 60px 0 48px; }
-
-    .ig-logo {
-      width: 60px; height: 60px;
-      border-radius: 16px;
-      background: linear-gradient(135deg, #f9ce34 0%, #f47121 25%, #c13584 50%, #833ab4 75%, #5851db 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .form-area { display: flex; flex-direction: column; gap: 12px; }
-
-    .input-field {
-      width: 100%;
-      padding: 14px 16px;
-      border: 1px solid #dbdbdb;
-      border-radius: 8px;
-      font-size: 14px;
-      color: #262626;
-      background: #fafafa;
-      outline: none;
-    }
-    .input-field::placeholder { color: #8e8e8e; }
-    .input-field:focus { border-color: #a8a8a8; background: #fff; }
-
-    .login-btn {
-      width: 100%;
-      padding: 14px;
-      background: #0095f6;
-      color: #fff;
+    .back-btn {
+      width: 38px;
+      height: 38px;
       border: none;
-      border-radius: 8px;
-      font-size: 15px;
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    .back-btn:hover {
+      background: #f2f2f2;
+    }
+
+    .language {
+      font-size: 14px;
+      color: #333;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin: 0 auto;
+    }
+
+    .page {
+      display: none;
+      animation: slide 0.35s ease;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes slide {
+      from {
+        opacity: 0;
+        transform: translateX(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .logo-section {
+      display: flex;
+      justify-content: center;
+      margin-top: 55px;
+      margin-bottom: 48px;
+    }
+
+    .logo {
+      width: 76px;
+      height: 76px;
+      border-radius: 22px;
+      background: radial-gradient(circle at 30% 110%, #feda75 0%, #fa7e1e 25%, #d62976 50%, #962fbf 75%, #4f5bd5 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 12px 30px rgba(214, 41, 118, 0.28);
+    }
+
+    .logo svg {
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,0.18));
+    }
+
+    .heading {
+      text-align: center;
+      margin-bottom: 26px;
+    }
+
+    .heading h2 {
+      font-size: 24px;
+      color: #111;
+      margin-bottom: 8px;
+    }
+
+    .heading p {
+      font-size: 14px;
+      color: #777;
+      line-height: 1.5;
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .input-box {
+      position: relative;
+    }
+
+    .input-box input {
+      width: 100%;
+      height: 52px;
+      border: 1px solid #ddd;
+      background: #fafafa;
+      border-radius: 13px;
+      padding: 0 15px;
+      font-size: 14px;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    .input-box input:focus {
+      border-color: #0095f6;
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(0, 149, 246, 0.08);
+    }
+
+    .input-box .toggle {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 13px;
       font-weight: 600;
+      color: #0095f6;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .primary-btn {
+      width: 100%;
+      height: 50px;
+      border: none;
+      border-radius: 13px;
+      background: linear-gradient(135deg, #0095f6, #1877f2);
+      color: white;
+      font-size: 15px;
+      font-weight: 700;
       cursor: pointer;
       margin-top: 4px;
+      transition: 0.2s;
+      box-shadow: 0 10px 22px rgba(0, 149, 246, 0.25);
     }
-    .login-btn:hover { background: #1877f2; }
+
+    .primary-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(0, 149, 246, 0.32);
+    }
+
+    .primary-btn:active {
+      transform: scale(0.98);
+    }
 
     .forgot {
       text-align: center;
-      margin-top: 16px;
-      font-size: 13px;
+      margin-top: 18px;
+      font-size: 14px;
       font-weight: 600;
-      color: #262626;
+      color: #111;
       cursor: pointer;
     }
 
-    .spacer { flex: 1; }
-
-    .bottom { padding-bottom: 28px; }
-
-    .create-btn {
-      width: 100%;
-      padding: 13px;
-      background: #fff;
+    .forgot:hover {
       color: #0095f6;
-      border: 1.5px solid #0095f6;
-      border-radius: 8px;
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
     }
-    .create-btn:hover { background: #e8f4fd; }
 
-    .meta-logo {
-      text-align: center;
-      margin-top: 20px;
+    .divider {
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 6px;
-      color: #8e8e8e;
+      gap: 14px;
+      margin: 26px 0;
+      color: #999;
       font-size: 13px;
+      font-weight: 700;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      height: 1px;
+      background: #ddd;
+      flex: 1;
+    }
+
+    .demo-btn {
+      width: 100%;
+      height: 48px;
+      border-radius: 13px;
+      border: 1px solid #ddd;
+      background: white;
+      font-size: 14px;
+      font-weight: 700;
+      color: #333;
+      cursor: pointer;
+    }
+
+    .demo-btn:hover {
+      background: #fafafa;
+    }
+
+    .bottom-area {
+      margin-top: auto;
+      padding-bottom: 18px;
+    }
+
+    .outline-btn {
+      width: 100%;
+      height: 49px;
+      border: 1.5px solid #0095f6;
+      background: #fff;
+      color: #0095f6;
+      border-radius: 13px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .outline-btn:hover {
+      background: #eef8ff;
+    }
+
+    .meta {
+      margin-top: 22px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      color: #888;
+      font-size: 13px;
+      font-weight: 500;
     }
 
     .home-bar {
-      height: 4px;
       width: 120px;
-      background: #262626;
-      border-radius: 4px;
+      height: 4px;
+      background: #111;
+      border-radius: 20px;
       margin: 12px auto 0;
+    }
+
+    .message {
+      margin-top: 14px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      min-height: 20px;
+    }
+
+    .success {
+      color: #16a34a;
+    }
+
+    .error {
+      color: #dc2626;
+    }
+
+    .small-text {
+      margin-top: 18px;
+      text-align: center;
+      color: #777;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .small-text span {
+      color: #0095f6;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    @media (max-width: 430px) {
+      body {
+        background: #fff;
+      }
+
+      .mobile {
+        width: 100%;
+      }
     }
   </style>
 </head>
+
 <body>
-  <div class="screen">
 
-    
+  <div class="mobile">
 
-    <!-- Back Arrow -->
-    <div class="back-btn">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path d="M19 12H5M12 5l-7 7 7 7" stroke="#262626" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
+    <div class="top-row">
+      <button class="back-btn" onclick="goBack()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M19 12H5M12 5L5 12L12 19" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
 
-    <!-- Language Selector -->
-    <div class="lang-selector">
-      English (UK)
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-        <path d="M6 9l6 6 6-6" stroke="#262626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
-
-    <!-- Instagram Logo -->
-    <div class="logo-wrap">
-      <div class="ig-logo">
-        <svg width="38" height="38" viewBox="0 0 24 24" fill="none">
-          <rect x="2" y="2" width="20" height="20" rx="5.5" stroke="white" stroke-width="2"/>
-          <circle cx="12" cy="12" r="4.5" stroke="white" stroke-width="2"/>
-          <circle cx="17.5" cy="6.5" r="1" fill="white"/>
+      <div class="language">
+        English (UK)
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+          <path d="M6 9L12 15L18 9" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </div>
     </div>
 
-    <!-- Form -->
-    <div class="form-area">
-      <input class="input-field" type="text" placeholder="Username, email address or mobile number" value="__abh.ay_" />
-      <input class="input-field" type="password" placeholder="Password" />
-      <button class="login-btn" onclick="openInstagram('nasa')">Log in</button>
-
-<script>
-function openInstagram(username) {
-  // 1. Define the native app link and the fallback website link
-  const appUrl = `instagram://user?username=${username}`;
-  const webUrl = `https://instagram.com{username}`;
-
-  // 2. Check if the user is on a mobile device
-  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-  if (isMobile) {
-    // Try opening the native Instagram app
-    window.location.href = appUrl;
-
-    // Fallback: If the app isn't installed, open the browser version after 1.5 seconds
-    setTimeout(() => {
-      window.location.href = webUrl;
-    }, 1500);
-  } else {
-    // If on a desktop/laptop computer, go straight to the website
-    window.open(webUrl, '_blank');
-  }
-}
-</script>
-    </div>
-
-    <div class="forgot">Forgotten password?</div>
-
-    <div class="spacer"></div>
-
-    <!-- Bottom Buttons -->
-    <div class="bottom">
-      <button class="create-btn">Create new account</button>
-      <div class="meta-logo">
-        <!-- Meta wordmark -->
-        <svg width="44" height="16" viewBox="0 0 44 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M2 12.5C2 9.5 3.2 6.8 5 5.1 6.2 4 7.5 3.5 8.8 3.5c.9 0 1.8.3 2.5.9C12.6 5.4 13.8 7.5 13.8 10c0 1.8-.5 3.3-1.4 4.3-.7.8-1.5 1.2-2.4 1.2-.8 0-1.6-.4-2.2-1.2-.5.8-1.2 1.2-2 1.2-.8 0-1.5-.4-2-1.2C3.3 13.4 3 12 3 10.5c0-.6.1-1.2.2-1.7" stroke="#8e8e8e" stroke-width="1.3" stroke-linecap="round"/>
-          <path d="M20 4v10M20 4l3.5 4.5L27 4M27 4v10" stroke="#8e8e8e" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M30 4h3c1.7 0 3 1.3 3 3s-1.3 3-3 3h-3V4zM30 10h.5l3.5 4" stroke="#8e8e8e" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M39 9c0-2.5 1.6-4.5 3.6-4.5S46 6.5 46 9s-1.6 4.5-3.6 4.5S39 11.5 39 9z" stroke="#8e8e8e" stroke-width="1.3"/>
-        </svg>
-        <span>Meta</span>
+    <!-- LOGIN PAGE -->
+    <section class="page active" id="loginPage">
+      <div class="logo-section">
+        <div class="logo">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none">
+            <rect x="2.2" y="2.2" width="19.6" height="19.6" rx="5.6" stroke="white" stroke-width="2"/>
+            <circle cx="12" cy="12" r="4.4" stroke="white" stroke-width="2"/>
+            <circle cx="17.4" cy="6.6" r="1.1" fill="white"/>
+          </svg>
+        </div>
       </div>
-    </div>
 
-    <!-- Home Bar -->
-    <div class="home-bar"></div>
+      <div class="form">
+        <div class="input-box">
+          <input type="text" id="loginUser" placeholder="Username, email or mobile number">
+        </div>
+
+        <div class="input-box">
+          <input type="password" id="loginPassword" placeholder="Password">
+          <span class="toggle" onclick="togglePassword('loginPassword', this)">Show</span>
+        </div>
+
+        <button class="primary-btn" onclick="loginUser()">Log in</button>
+      </div>
+
+      <div class="forgot" onclick="showPage('forgotPage')">
+        Forgotten password?
+      </div>
+
+      <div class="divider">OR</div>
+
+     
+
+      <div class="message" id="loginMsg"></div>
+    </section>
+
+    <!-- REGISTER PAGE -->
+    <section class="page" id="registerPage">
+      <div class="heading">
+        <h2>Create new account</h2>
+        <p>Join your own social app project with a clean profile.</p>
+      </div>
+
+      <div class="form">
+        <div class="input-box">
+          <input type="text" id="fullName" placeholder="Full name">
+        </div>
+
+        <div class="input-box">
+          <input type="text" id="username" placeholder="Username">
+        </div>
+
+        <div class="input-box">
+          <input type="email" id="email" placeholder="Email address">
+        </div>
+
+        <div class="input-box">
+          <input type="password" id="newPassword" placeholder="Create password">
+          <span class="toggle" onclick="togglePassword('newPassword', this)">Show</span>
+        </div>
+
+        <button class="primary-btn" onclick="registerUser()">Create Account</button>
+      </div>
+
+      <p class="small-text">
+        Already have an account?
+        <span onclick="showPage('loginPage')">Log in</span>
+      </p>
+
+      <div class="message" id="registerMsg"></div>
+    </section>
+
+    <!-- FORGOT PASSWORD PAGE -->
+    <section class="page" id="forgotPage">
+      <div class="heading">
+        <h2>Find your account</h2>
+        <p>Enter your email, username or mobile number to reset your password.</p>
+      </div>
+
+      <div class="form">
+        <div class="input-box">
+          <input type="text" id="forgotInput" placeholder="Email, username or mobile number">
+        </div>
+
+        <button class="primary-btn" onclick="resetPassword()">Send Reset Link</button>
+      </div>
+
+      <p class="small-text">
+        Remember password?
+        <span onclick="showPage('loginPage')">Back to login</span>
+      </p>
+
+      <div class="message" id="forgotMsg"></div>
+    </section>
+
+    <div class="bottom-area">
+      <button class="outline-btn" onclick="showPage('registerPage')">
+        Create new account
+      </button>
+
+      <div class="meta">
+        <svg width="26" height="16" viewBox="0 0 40 24" fill="none">
+          <path d="M4 17C4 11 7 6 11 6C14 6 16.5 9.5 20 14C23.5 9.5 26 6 29 6C33 6 36 11 36 17C36 20 34.5 22 32 22C28.5 22 25.5 17 20 10C14.5 17 11.5 22 8 22C5.5 22 4 20 4 17Z" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Meta
+      </div>
+
+      
+    </div>
 
   </div>
+
+  <script>
+    let currentPage = "loginPage";
+
+    function showPage(pageId) {
+      const pages = document.querySelectorAll(".page");
+
+      pages.forEach(page => {
+        page.classList.remove("active");
+      });
+
+      document.getElementById(pageId).classList.add("active");
+      currentPage = pageId;
+      clearMessages();
+    }
+
+    function goBack() {
+      if (currentPage === "loginPage") {
+        return;
+      }
+
+      showPage("loginPage");
+    }
+
+    function clearMessages() {
+      document.querySelectorAll(".message").forEach(msg => {
+        msg.innerText = "";
+        msg.className = "message";
+      });
+    }
+
+    function showMessage(id, text, type) {
+      const box = document.getElementById(id);
+      box.innerText = text;
+      box.classList.add(type);
+    }
+
+    function togglePassword(inputId, element) {
+      const input = document.getElementById(inputId);
+
+      if (input.type === "password") {
+        input.type = "text";
+        element.innerText = "Hide";
+      } else {
+        input.type = "password";
+        element.innerText = "Show";
+      }
+    }
+
+    function loginUser() {
+      const user = document.getElementById("loginUser").value.trim();
+      const password = document.getElementById("loginPassword").value.trim();
+
+      if (user === "" || password === "") {
+        showMessage("loginMsg", "Please enter username and password.", "error");
+        return;
+      }
+
+      if (password.length < 6) {
+        showMessage("loginMsg", "Password must be at least 6 characters.", "error");
+        return;
+      }
+
+      showMessage("loginMsg", "Demo login successful.", "success");
+    }
+
+    function demoLogin() {
+      document.getElementById("loginUser").value = "demo_user";
+      document.getElementById("loginPassword").value = "123456";
+      showMessage("loginMsg", "Demo details filled. Click Log in.", "success");
+    }
+
+    function registerUser() {
+      const name = document.getElementById("fullName").value.trim();
+      const username = document.getElementById("username").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("newPassword").value.trim();
+
+      if (name === "" || username === "" || email === "" || password === "") {
+        showMessage("registerMsg", "Please fill all fields.", "error");
+        return;
+      }
+
+      if (!email.includes("@") || !email.includes(".")) {
+        showMessage("registerMsg", "Please enter a valid email address.", "error");
+        return;
+      }
+
+      if (password.length < 6) {
+        showMessage("registerMsg", "Password must be at least 6 characters.", "error");
+        return;
+      }
+
+      showMessage("registerMsg", "Account created successfully.", "success");
+
+      setTimeout(() => {
+        showPage("loginPage");
+      }, 1000);
+    }
+
+    function resetPassword() {
+      const value = document.getElementById("forgotInput").value.trim();
+
+      if (value === "") {
+        showMessage("forgotMsg", "Please enter your email, username or phone.", "error");
+        return;
+      }
+
+      showMessage("forgotMsg", "Demo reset link sent successfully.", "success");
+    }
+  </script>
+
 </body>
 </html>
