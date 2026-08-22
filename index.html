@@ -1,563 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>InstaClone Auth UI</title>
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-    }
-
-    body {
-      min-height: 100vh;
-      background: #f4f4f4;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .mobile {
-      width: 390px;
-      min-height: 100vh;
-      background: #fff;
-      padding: 18px 24px 14px;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .top-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
-    }
-
-    .back-btn {
-      width: 38px;
-      height: 38px;
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-    }
-
-    .back-btn:hover {
-      background: #f2f2f2;
-    }
-
-    .language {
-      font-size: 14px;
-      color: #333;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      margin: 0 auto;
-    }
-
-    .page {
-      display: none;
-      animation: slide 0.35s ease;
-    }
-
-    .page.active {
-      display: block;
-    }
-
-    @keyframes slide {
-      from {
-        opacity: 0;
-        transform: translateX(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    .logo-section {
-      display: flex;
-      justify-content: center;
-      margin-top: 55px;
-      margin-bottom: 48px;
-    }
-
-    .logo {
-      width: 76px;
-      height: 76px;
-      border-radius: 22px;
-      background: radial-gradient(circle at 30% 110%, #feda75 0%, #fa7e1e 25%, #d62976 50%, #962fbf 75%, #4f5bd5 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 12px 30px rgba(214, 41, 118, 0.28);
-    }
-
-    .logo svg {
-      filter: drop-shadow(0 2px 3px rgba(0,0,0,0.18));
-    }
-
-    .heading {
-      text-align: center;
-      margin-bottom: 26px;
-    }
-
-    .heading h2 {
-      font-size: 24px;
-      color: #111;
-      margin-bottom: 8px;
-    }
-
-    .heading p {
-      font-size: 14px;
-      color: #777;
-      line-height: 1.5;
-    }
-
-    .form {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .input-box {
-      position: relative;
-    }
-
-    .input-box input {
-      width: 100%;
-      height: 52px;
-      border: 1px solid #ddd;
-      background: #fafafa;
-      border-radius: 13px;
-      padding: 0 15px;
-      font-size: 14px;
-      outline: none;
-      transition: 0.2s;
-    }
-
-    .input-box input:focus {
-      border-color: #0095f6;
-      background: #fff;
-      box-shadow: 0 0 0 4px rgba(0, 149, 246, 0.08);
-    }
-
-    .input-box .toggle {
-      position: absolute;
-      right: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 13px;
-      font-weight: 600;
-      color: #0095f6;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .primary-btn {
-      width: 100%;
-      height: 50px;
-      border: none;
-      border-radius: 13px;
-      background: linear-gradient(135deg, #0095f6, #1877f2);
-      color: white;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      margin-top: 4px;
-      transition: 0.2s;
-      box-shadow: 0 10px 22px rgba(0, 149, 246, 0.25);
-    }
-
-    .primary-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 14px 28px rgba(0, 149, 246, 0.32);
-    }
-
-    .primary-btn:active {
-      transform: scale(0.98);
-    }
-
-    .forgot {
-      text-align: center;
-      margin-top: 18px;
-      font-size: 14px;
-      font-weight: 600;
-      color: #111;
-      cursor: pointer;
-    }
-
-    .forgot:hover {
-      color: #0095f6;
-    }
-
-    .divider {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin: 26px 0;
-      color: #999;
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .divider::before,
-    .divider::after {
-      content: "";
-      height: 1px;
-      background: #ddd;
-      flex: 1;
-    }
-
-    .demo-btn {
-      width: 100%;
-      height: 48px;
-      border-radius: 13px;
-      border: 1px solid #ddd;
-      background: white;
-      font-size: 14px;
-      font-weight: 700;
-      color: #333;
-      cursor: pointer;
-    }
-
-    .demo-btn:hover {
-      background: #fafafa;
-    }
-
-    .bottom-area {
-      margin-top: auto;
-      padding-bottom: 18px;
-    }
-
-    .outline-btn {
-      width: 100%;
-      height: 49px;
-      border: 1.5px solid #0095f6;
-      background: #fff;
-      color: #0095f6;
-      border-radius: 13px;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .outline-btn:hover {
-      background: #eef8ff;
-    }
-
-    .meta {
-      margin-top: 22px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 6px;
-      color: #888;
-      font-size: 13px;
-      font-weight: 500;
-    }
-
-    .home-bar {
-      width: 120px;
-      height: 4px;
-      background: #111;
-      border-radius: 20px;
-      margin: 12px auto 0;
-    }
-
-    .message {
-      margin-top: 14px;
-      text-align: center;
-      font-size: 14px;
-      font-weight: 600;
-      min-height: 20px;
-    }
-
-    .success {
-      color: #16a34a;
-    }
-
-    .error {
-      color: #dc2626;
-    }
-
-    .small-text {
-      margin-top: 18px;
-      text-align: center;
-      color: #777;
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    .small-text span {
-      color: #0095f6;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    @media (max-width: 430px) {
-      body {
-        background: #fff;
-      }
-
-      .mobile {
-        width: 100%;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I'm Sorry ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(-45deg,#ff4d6d,#ff758f,#ff8fab,#ffc2d1);
+    background-size:400% 400%;
+    animation:bg 12s ease infinite;
+}
+@keyframes bg{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+.card{
+    width:90%;
+    max-width:650px;
+    padding:40px;
+    text-align:center;
+    border-radius:25px;
+    background:rgba(255,255,255,.15);
+    backdrop-filter:blur(15px);
+    border:1px solid rgba(255,255,255,.25);
+    box-shadow:0 20px 50px rgba(0,0,0,.25);
+    color:#fff;
+    position:relative;
+    z-index:2;
+}
+.emoji{font-size:65px;animation:beat 1s infinite}
+@keyframes beat{50%{transform:scale(1.15)}}
+h1{font-size:42px;margin:10px 0}
+.subtitle{opacity:.9;margin-bottom:20px}
+#text{
+    min-height:90px;
+    line-height:1.8;
+    font-size:18px;
+}
+.buttons{
+    position:relative;
+    height:70px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-top:20px;
+}
+button{
+    border:none;
+    padding:14px 28px;
+    border-radius:40px;
+    font-size:16px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.25s;
+}
+.yes{
+    background:#fff;
+    color:#ff2d55;
+    box-shadow:0 8px 20px rgba(255,255,255,.35);
+}
+.yes:hover{transform:scale(1.08)}
+.no{
+    position:fixed;
+    background:rgba(255,255,255,.18);
+    color:#fff;
+    border:1px solid rgba(255,255,255,.3);
+    z-index:999;
+}
+#final{
+    display:none;
+    animation:fade 1s ease;
+}
+@keyframes fade{
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1;transform:translateY(0)}
+}
+.floating{
+    position:fixed;
+    bottom:-30px;
+    color:white;
+    animation:float linear forwards;
+    pointer-events:none;
+}
+@keyframes float{
+    to{transform:translateY(-110vh) rotate(360deg);opacity:0}
+}
+</style>
 </head>
-
 <body>
 
-  <div class="mobile">
+<div class="card">
+    <div class="emoji">🥺</div>
+    <h1>I'm Really Sorry</h1>
+    <p class="subtitle">A message straight from my heart ❤️</p>
 
-    <div class="top-row">
-      <button class="back-btn" onclick="goBack()">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <path d="M19 12H5M12 5L5 12L12 19" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
+    <div id="text"></div>
 
-      <div class="language">
-        English (UK)
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-          <path d="M6 9L12 15L18 9" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
+    <div class="buttons" id="btns">
+        <button class="yes" onclick="forgive()">💖 Yes, I Forgive You</button>
     </div>
 
-    <!-- LOGIN PAGE -->
-    <section class="page active" id="loginPage">
-      <div class="logo-section">
-        <div class="logo">
-          <svg width="44" height="44" viewBox="0 0 24 24" fill="none">
-            <rect x="2.2" y="2.2" width="19.6" height="19.6" rx="5.6" stroke="white" stroke-width="2"/>
-            <circle cx="12" cy="12" r="4.4" stroke="white" stroke-width="2"/>
-            <circle cx="17.4" cy="6.6" r="1.1" fill="white"/>
-          </svg>
-        </div>
-      </div>
-
-      <div class="form">
-        <div class="input-box">
-          <input type="text" id="loginUser" placeholder="Username, email or mobile number">
-        </div>
-
-        <div class="input-box">
-          <input type="password" id="loginPassword" placeholder="Password">
-          <span class="toggle" onclick="togglePassword('loginPassword', this)">Show</span>
-        </div>
-
-        <button class="primary-btn" onclick="loginUser()">Log in</button>
-      </div>
-
-      <div class="forgot" onclick="showPage('forgotPage')">
-        Forgotten password?
-      </div>
-
-      <div class="divider">OR</div>
-
-     
-
-      <div class="message" id="loginMsg"></div>
-    </section>
-
-    <!-- REGISTER PAGE -->
-    <section class="page" id="registerPage">
-      <div class="heading">
-        <h2>Create new account</h2>
-        <p>Join your own social app project with a clean profile.</p>
-      </div>
-
-      <div class="form">
-        <div class="input-box">
-          <input type="text" id="fullName" placeholder="Full name">
-        </div>
-
-        <div class="input-box">
-          <input type="text" id="username" placeholder="Username">
-        </div>
-
-        <div class="input-box">
-          <input type="email" id="email" placeholder="Email address">
-        </div>
-
-        <div class="input-box">
-          <input type="password" id="newPassword" placeholder="Create password">
-          <span class="toggle" onclick="togglePassword('newPassword', this)">Show</span>
-        </div>
-
-        <button class="primary-btn" onclick="registerUser()">Create Account</button>
-      </div>
-
-      <p class="small-text">
-        Already have an account?
-        <span onclick="showPage('loginPage')">Log in</span>
-      </p>
-
-      <div class="message" id="registerMsg"></div>
-    </section>
-
-    <!-- FORGOT PASSWORD PAGE -->
-    <section class="page" id="forgotPage">
-      <div class="heading">
-        <h2>Find your account</h2>
-        <p>Enter your email, username or mobile number to reset your password.</p>
-      </div>
-
-      <div class="form">
-        <div class="input-box">
-          <input type="text" id="forgotInput" placeholder="Email, username or mobile number">
-        </div>
-
-        <button class="primary-btn" onclick="resetPassword()">Send Reset Link</button>
-      </div>
-
-      <p class="small-text">
-        Remember password?
-        <span onclick="showPage('loginPage')">Back to login</span>
-      </p>
-
-      <div class="message" id="forgotMsg"></div>
-    </section>
-
-    <div class="bottom-area">
-      <button class="outline-btn" onclick="showPage('registerPage')">
-        Create new account
-      </button>
-
-      <div class="meta">
-        <svg width="26" height="16" viewBox="0 0 40 24" fill="none">
-          <path d="M4 17C4 11 7 6 11 6C14 6 16.5 9.5 20 14C23.5 9.5 26 6 29 6C33 6 36 11 36 17C36 20 34.5 22 32 22C28.5 22 25.5 17 20 10C14.5 17 11.5 22 8 22C5.5 22 4 20 4 17Z" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Meta
-      </div>
-
-      
+    <div id="final">
+        <h2>😭 Thank You So Much!</h2>
+        <p style="margin-top:15px;font-size:18px;line-height:1.7">
+            Your forgiveness means everything to me. I promise to value your smile,
+            your trust, and never repeat my mistake. ❤️
+        </p>
+        <div style="font-size:55px;margin-top:15px">🌹❤️</div>
     </div>
+</div>
 
-  </div>
+<button class="no" id="noBtn">🙈 No</button>
 
-  <script>
-    let currentPage = "loginPage";
-
-    function showPage(pageId) {
-      const pages = document.querySelectorAll(".page");
-
-      pages.forEach(page => {
-        page.classList.remove("active");
-      });
-
-      document.getElementById(pageId).classList.add("active");
-      currentPage = pageId;
-      clearMessages();
+<script>
+const message = "I know I hurt you, and I'm genuinely sorry. Every moment without your smile feels incomplete. Please give me one chance to make everything right. ❤️";
+let i = 0;
+function type(){
+    if(i < message.length){
+        document.getElementById('text').innerHTML += message.charAt(i);
+        i++;
+        setTimeout(type,35);
     }
+}
+type();
 
-    function goBack() {
-      if (currentPage === "loginPage") {
-        return;
-      }
+const noBtn = document.getElementById('noBtn');
+let x = window.innerWidth*0.68;
+let y = window.innerHeight*0.72;
 
-      showPage("loginPage");
-    }
+function place(){
+    noBtn.style.left = x+'px';
+    noBtn.style.top = y+'px';
+}
+place();
 
-    function clearMessages() {
-      document.querySelectorAll(".message").forEach(msg => {
-        msg.innerText = "";
-        msg.className = "message";
-      });
-    }
+function moveNo(){
+    const pad = 20;
+    const w = noBtn.offsetWidth;
+    const h = noBtn.offsetHeight;
 
-    function showMessage(id, text, type) {
-      const box = document.getElementById(id);
-      box.innerText = text;
-      box.classList.add(type);
-    }
+    x = Math.random()*(window.innerWidth-w-pad);
+    y = Math.random()*(window.innerHeight-h-pad);
+    noBtn.style.left = x+'px';
+    noBtn.style.top = y+'px';
+}
 
-    function togglePassword(inputId, element) {
-      const input = document.getElementById(inputId);
+document.addEventListener('mousemove',(e)=>{
+    const r = noBtn.getBoundingClientRect();
+    const cx = r.left+r.width/2;
+    const cy = r.top+r.height/2;
+    const dist = Math.hypot(e.clientX-cx,e.clientY-cy);
+    if(dist < 130) moveNo();
+});
 
-      if (input.type === "password") {
-        input.type = "text";
-        element.innerText = "Hide";
-      } else {
-        input.type = "password";
-        element.innerText = "Show";
-      }
-    }
+document.addEventListener('touchstart',moveNo,{passive:true});
+document.addEventListener('touchmove',moveNo,{passive:true});
+noBtn.addEventListener('click',(e)=>{e.preventDefault();moveNo();});
+window.addEventListener('resize',moveNo);
 
-    function loginUser() {
-      const user = document.getElementById("loginUser").value.trim();
-      const password = document.getElementById("loginPassword").value.trim();
+function forgive(){
+    document.getElementById('btns').style.display='none';
+    noBtn.style.display='none';
+    document.getElementById('final').style.display='block';
+    burst();
+}
 
-      if (user === "" || password === "") {
-        showMessage("loginMsg", "Please enter username and password.", "error");
-        return;
-      }
-
-      if (password.length < 6) {
-        showMessage("loginMsg", "Password must be at least 6 characters.", "error");
-        return;
-      }
-
-      showMessage("loginMsg", "Demo login successful.", "success");
-    }
-
-    function demoLogin() {
-      document.getElementById("loginUser").value = "demo_user";
-      document.getElementById("loginPassword").value = "123456";
-      showMessage("loginMsg", "Demo details filled. Click Log in.", "success");
-    }
-
-    function registerUser() {
-      const name = document.getElementById("fullName").value.trim();
-      const username = document.getElementById("username").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("newPassword").value.trim();
-
-      if (name === "" || username === "" || email === "" || password === "") {
-        showMessage("registerMsg", "Please fill all fields.", "error");
-        return;
-      }
-
-      if (!email.includes("@") || !email.includes(".")) {
-        showMessage("registerMsg", "Please enter a valid email address.", "error");
-        return;
-      }
-
-      if (password.length < 6) {
-        showMessage("registerMsg", "Password must be at least 6 characters.", "error");
-        return;
-      }
-
-      showMessage("registerMsg", "Account created successfully.", "success");
-
-      setTimeout(() => {
-        showPage("loginPage");
-      }, 1000);
-    }
-
-    function resetPassword() {
-      const value = document.getElementById("forgotInput").value.trim();
-
-      if (value === "") {
-        showMessage("forgotMsg", "Please enter your email, username or phone.", "error");
-        return;
-      }
-
-      showMessage("forgotMsg", "Demo reset link sent successfully.", "success");
-    }
-  </script>
+function heart(){
+    const h=document.createElement('div');
+    h.className='floating';
+    h.innerHTML=Math.random()>.5?'❤️':'💖';
+    h.style.left=Math.random()*100+'vw';
+    h.style.fontSize=(18+Math.random()*30)+'px';
+    h.style.animationDuration=(4+Math.random()*4)+'s';
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),8000);
+}
+setInterval(heart,300);
+function burst(){
+    for(let i=0;i<40;i++) setTimeout(heart,i*60);
+}
+</script>
 
 </body>
 </html>
