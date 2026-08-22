@@ -3,193 +3,128 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>I'm Sorry Garima jadoun ❤️</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>Laila ❤️ Majnu</title>
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
 body{
     height:100vh;
-    overflow:hidden;
     display:flex;
-    background-image:url("Screenshot\ \(195\).png");
-    /* background-size: cover; */
     justify-content:center;
     align-items:center;
-    /* background:linear-gradient(-45deg,#ff4d6d,#ff758f,#ff8fab,#ffc2d1); */
-    /* background-size:400% 400%; */
+    overflow:hidden;
+    background:linear-gradient(-45deg,#0f0c29,#302b63,#24243e,#4b134f);
+    background-size:400% 400%;
     animation:bg 12s ease infinite;
 }
+
 @keyframes bg{
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
 }
+
 .card{
     width:90%;
-    max-width:650px;
-    padding:40px;
+    max-width:700px;
+    padding:50px 35px;
     text-align:center;
+    color:white;
     border-radius:25px;
-    background:rgba(255,255,255,.15);
+    background:rgba(255,255,255,0.08);
     backdrop-filter:blur(15px);
-    border:1px solid rgba(255,255,255,.25);
-    box-shadow:0 20px 50px rgba(0,0,0,.25);
-    color:#fff;
-    position:relative;
+    border:1px solid rgba(255,255,255,0.2);
+    box-shadow:0 0 35px rgba(255,105,180,.25);
     z-index:2;
 }
-.emoji{font-size:65px;animation:beat 1s infinite}
-@keyframes beat{50%{transform:scale(1.15)}}
-h1{font-size:42px;margin:10px 0}
-.subtitle{opacity:.9;margin-bottom:20px}
-#text{
-    min-height:90px;
-    line-height:1.8;
-    font-size:18px;
+
+h1{
+    font-size:45px;
+    color:#ff8fcf;
+    margin-bottom:10px;
+    text-shadow:0 0 12px rgba(255,105,180,.7);
 }
-.buttons{
-    position:relative;
-    height:70px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    margin-top:20px;
+
+.line{
+    font-size:28px;
+    line-height:1.7;
+    margin:35px 0;
+    font-weight:500;
 }
-button{
-    border:none;
-    padding:14px 28px;
-    border-radius:40px;
-    font-size:16px;
-    cursor:pointer;
-    font-weight:600;
-    transition:.25s;
+
+.highlight{
+    color:#ffd6ec;
+    font-size:34px;
+    font-weight:bold;
+    text-shadow:0 0 15px #ff6fb5;
 }
-.yes{
-    background:#fff;
-    color:#ff2d55;
-    box-shadow:0 8px 20px rgba(255,255,255,.35);
+
+.footer{
+    margin-top:25px;
+    color:#ddd;
+    letter-spacing:3px;
+    font-size:14px;
 }
-.yes:hover{transform:scale(1.08)}
-.no{
-    position:fixed;
-    background:rgba(255,255,255,.18);
-    color:#fff;
-    border:1px solid rgba(255,255,255,.3);
-    z-index:999;
+
+.heart{
+    position:absolute;
+    color:#ff6fae;
+    font-size:22px;
+    animation:float 8s linear infinite;
+    opacity:.8;
 }
-#final{
-    display:none;
-    animation:fade 1s ease;
-}
-@keyframes fade{
-    from{opacity:0;transform:translateY(20px)}
-    to{opacity:1;transform:translateY(0)}
-}
-.floating{
-    position:fixed;
-    bottom:-30px;
-    color:white;
-    animation:float linear forwards;
-    pointer-events:none;
-}
+
 @keyframes float{
-    to{transform:translateY(-110vh) rotate(360deg);opacity:0}
+    0%{
+        transform:translateY(100vh) scale(.5);
+        opacity:0;
+    }
+    20%{opacity:1;}
+    100%{
+        transform:translateY(-120px) scale(1.4);
+        opacity:0;
+    }
 }
 </style>
 </head>
 <body>
 
 <div class="card">
-    <div class="emoji">🥺</div>
-    <h1>I'm Really Sorry Shreya jadoun</h1>
-   
-    
-  <p class="subtitle">A message straight from my heart ❤️</p>
+    <h1>❤️ Laila Majnu ❤️</h1>
 
-     <div id="text"></div>
-
-    <div class="buttons" id="btns">
-        <button class="yes" onclick="forgive()">💖 Yes, I Forgive You</button>
+    <div class="line">
+        <span class="highlight">"Kya baat hai tumko..."</span>
+        <br><br>
+        <span class="highlight">"Kya baat hai mujhko..."</span>
     </div>
 
-    <div id="final">
-        <h2>😭 Thank You So Much!</h2>
-        <p style="margin-top:15px;font-size:18px;line-height:1.7">
-            Your forgiveness means everything to me. I promise to value your smile,
-            your trust, and never repeat my mistake. ❤️
-        </p>
-        <div style="font-size:55px;margin-top:15px">🌹❤️</div>
+    <p style="font-size:18px;color:#f1f1f1;">
+        Sometimes love doesn't need long conversations,
+        just one question that reaches two hearts.
+    </p>
+
+    <div class="footer">
+        Forever • Laila & Majnu
     </div>
 </div>
 
-<button class="no" id="noBtn">🙈 No</button>
-
+<!-- Floating Hearts -->
 <script>
-const message = "Bilkul efforts karunga or dikhaunga bhi , if their is only 1% chance i will fought for it.  ❤️";
-let i = 0;
-function type(){
-    if(i < message.length){
-        document.getElementById('text').innerHTML += message.charAt(i);
-        i++;
-        setTimeout(type,35);
-    }
-}
-type();
-
-const noBtn = document.getElementById('noBtn');
-let x = window.innerWidth*0.68;
-let y = window.innerHeight*0.72;
-
-function place(){
-    noBtn.style.left = x+'px';
-    noBtn.style.top = y+'px';
-}
-place();
-
-function moveNo(){
-    const pad = 20;
-    const w = noBtn.offsetWidth;
-    const h = noBtn.offsetHeight;
-
-    x = Math.random()*(window.innerWidth-w-pad);
-    y = Math.random()*(window.innerHeight-h-pad);
-    noBtn.style.left = x+'px';
-    noBtn.style.top = y+'px';
-}
-
-document.addEventListener('mousemove',(e)=>{
-    const r = noBtn.getBoundingClientRect();
-    const cx = r.left+r.width/2;
-    const cy = r.top+r.height/2;
-    const dist = Math.hypot(e.clientX-cx,e.clientY-cy);
-    if(dist < 130) moveNo();
-});
-
-document.addEventListener('touchstart',moveNo,{passive:true});
-document.addEventListener('touchmove',moveNo,{passive:true});
-noBtn.addEventListener('click',(e)=>{e.preventDefault();moveNo();});
-window.addEventListener('resize',moveNo);
-
-function forgive(){
-    document.getElementById('btns').style.display='none';
-    noBtn.style.display='none';
-    document.getElementById('final').style.display='block';
-    burst();
-}
-
-function heart(){
-    const h=document.createElement('div');
-    h.className='floating';
-    h.innerHTML=Math.random()>.5?'❤️':'💖';
-    h.style.left=Math.random()*100+'vw';
-    h.style.fontSize=(18+Math.random()*30)+'px';
-    h.style.animationDuration=(4+Math.random()*4)+'s';
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),8000);
-}
-setInterval(heart,300);
-function burst(){
-    for(let i=0;i<40;i++) setTimeout(heart,i*60);
+for(let i=0;i<40;i++){
+    const heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="❤";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.animationDuration=(5+Math.random()*5)+"s";
+    heart.style.animationDelay=Math.random()*6+"s";
+    heart.style.fontSize=(14+Math.random()*22)+"px";
+    document.body.appendChild(heart);
 }
 </script>
 
